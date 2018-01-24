@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hypermetaphorization</title>
+    <script>
+        function changedSynonyms() {
+            var ancestor = document.getElementById('selectors');
+            var descendents = ancestor.getElementsByTagName('select');
+
+            var text = "";
+            for (var i = 0; i < descendents.length; ++i) {
+                text += descendents[i].value + " ";
+                console.log(text);
+            }
+            document.getElementById("message_synonym").innerHTML = text;
+        }
+
+        function changedHyponyms() {
+            var ancestor = document.getElementById('selectors2');
+            var descendents = ancestor.getElementsByTagName('select');
+
+            var text = "";
+            for (var i = 0; i < descendents.length; ++i) {
+                text += descendents[i].value + " ";
+                console.log(text);
+            }
+            document.getElementById("message_hyponym").innerHTML = text;
+        }
+
+        function changedHypernyms() {
+            var ancestor = document.getElementById('selectors3');
+            var descendents = ancestor.getElementsByTagName('select');
+
+            var text = "";
+            for (var i = 0; i < descendents.length; ++i) {
+                text += descendents[i].value + " ";
+                console.log(text);
+            }
+            document.getElementById("message_hypernym").innerHTML = text;
+        }
+    </script>
+</head>
+<body>
+
+<!-- input -->
+<form method="post" >
+    input:<br>
+    <input type="text" name="input" size="100"><br>
+    <input type="submit" value="work it 😁🔥🔤">
+</form>
+<!-- input -->
+
+{% if result %}
+    {% if synonyms %}
+    <p>Synonyms</p>
+    <div id="selectors">
+        {% for word in synonyms %}
+            <select id="{{ word[0] }}" onchange="changedSynonyms()">
+            {% for syn in word %}
+                <option value="{{syn}}">{{syn}}</option>
+            {% endfor %}
+            </select>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if hyponyms %}
+    <p>Hyponyms</p>
+    <div id="selectors2">
+        {% for word in hyponyms %}
+            <select id="{{ word[0] }}" onchange="changedHyponyms()">
+            {% for syn in word %}
+                <option value="{{syn}}">{{syn}}</option>
+            {% endfor %}
+            </select>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if hypernyms %}
+    <p>Hypernyms</p>
+    <div id="selectors3">
+        {% for word in hypernyms %}
+            <select id="{{ word[0] }}" onchange="changedHypernyms()">
+            {% for syn in word %}
+                <option value="{{syn}}">{{syn}}</option>
+            {% endfor %}
+            </select>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+<div id="message_synonym">
+    {% for word in synonyms %}
+        {{ word[0] }}
+    {% endfor %}
+</div>
+
+<div id="message_hyponym">
+    {% for word in hyponyms %}
+        {{ word[0] }}
+    {% endfor %}
+</div>
+
+<div id="message_hypernym">
+    {% for word in hypernyms %}
+        {{ word[0] }}
+    {% endfor %}
+</div>
+
+{% endif %}
+
+</body>
+</html>
