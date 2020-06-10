@@ -91,6 +91,12 @@
     </div>
     {% endif %}
 
+<div id="input">
+    {% for word in input %}
+        {{ word }}
+    {% endfor %}
+</div>
+
 <div id="message_synonym">
     {% for word in synonyms %}
         {{ word[0] }}

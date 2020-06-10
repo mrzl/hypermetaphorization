@@ -15,9 +15,11 @@ def do_wordnet():
     result_synonym_list = []
     result_hyponym_list = []
     result_hypernym_list = []
+    input_list = []
     if request.method == 'POST':
         input = request.form['input']
         input = input.split(' ')
+        input_list = input
         for word in input:
             synonym_list = []
             hyponym_list = []
@@ -50,7 +52,7 @@ def do_wordnet():
 
         result = True
 
-    return render_template('index.html', result=result, synonyms=result_synonym_list, hypernyms=result_hypernym_list, hyponyms=result_hyponym_list)
+    return render_template('index.html', result=result, input=input_list, synonyms=result_synonym_list, hypernyms=result_hypernym_list, hyponyms=result_hyponym_list)
 
 
 if __name__ == "__main__":
